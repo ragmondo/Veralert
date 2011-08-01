@@ -1,0 +1,47 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "VeraAlerts", "VeraAlerts.pyproj", "{8F4FFE58-EFD7-4976-A7E6-5EFC7B45501E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E9DB3C7A-8497-4ECE-B52E-AF21A1BEDDD8}"
+	ProjectSection(SolutionItems) = preProject
+		..\actionlist.xml = ..\actionlist.xml
+		..\appengine\app.yaml = ..\appengine\app.yaml
+		..\..\bbappengine\src\bb.py = ..\..\bbappengine\src\bb.py
+		..\appengine\bbc2dm.py = ..\appengine\bbc2dm.py
+		..\..\bbappengine\src\bbmodels.py = ..\..\bbappengine\src\bbmodels.py
+		..\appengine\constants.py = ..\appengine\constants.py
+		..\D_AvMisc1.xml = ..\D_AvMisc1.xml
+		..\D_BinaryLight1.json = ..\D_BinaryLight1.json
+		..\D_BinaryLight1.xml = ..\D_BinaryLight1.xml
+		..\D_DimmableLight1.json = ..\D_DimmableLight1.json
+		..\D_VeraAlert.json = ..\D_VeraAlert.json
+		..\D_VeraAlert.xml = ..\D_VeraAlert.xml
+		..\D_Weather.json = ..\D_Weather.json
+		..\D_Weather.xml = ..\D_Weather.xml
+		..\ex1.lua = ..\ex1.lua
+		..\appengine\gaeunit.py = ..\appengine\gaeunit.py
+		..\appengine\helloworld.py = ..\appengine\helloworld.py
+		..\I_GoogleWeather.xml = ..\I_GoogleWeather.xml
+		..\I_VeraAlert.xml = ..\I_VeraAlert.xml
+		..\appengine\templates\message.html = ..\appengine\templates\message.html
+		..\S_SerialPort1.xml = ..\S_SerialPort1.xml
+		..\S_VeraAlert.xml = ..\S_VeraAlert.xml
+		..\appengine\test\test_basic.py = ..\appengine\test\test_basic.py
+		..\appengine\test\test_bbc2dm.py = ..\appengine\test\test_bbc2dm.py
+		..\appengine\veralert.py = ..\appengine\veralert.py
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8F4FFE58-EFD7-4976-A7E6-5EFC7B45501E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F4FFE58-EFD7-4976-A7E6-5EFC7B45501E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

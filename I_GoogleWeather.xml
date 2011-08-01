@@ -1,0 +1,316 @@
+<?xml version="1.0"?>
+<implementation>
+  <settings>
+    <protocol>cr</protocol>
+  </settings>
+  <functions>
+    local WEATHER_SERVICE = "urn:upnp-micasaverde-com:serviceId:Weather1"
+    local TEMPERATURE_SERVICE = "urn:upnp-org:serviceId:TemperatureSensor1"
+    local DEBUG_MODE = false
+
+    function log(text)
+        luup.log("GoogleWeather " .. text)
+    end
+
+    function debug(text)
+        if (DEBUG_MODE == true) then
+            log(text)
+        end
+    end
+
+    --
+    -- Extract an attribute list from a string of the form name=value name=value
+    --
+    -- Note that the value may be enclosed DoubleQuote characters, and this routine
+    -- will strip those out of the array that's returned.
+    --
+    function extractAttribute(stuff)
+        local result = {}
+
+        for attrName, attrValue in (string.gmatch(stuff, "(%w+)=\"(.-)\"")) do
+            result[attrName] = attrValue
+        end
+
+        return result
+    end
+
+    --
+    -- Extract an XML-like element (tag) from a string - simple form, no nesting...
+    --
+    function extractElement(stuff, element)
+        --
+        -- Elements are of the form:
+        --    &lt;element attr1=val1 attr2=val2>value&lt;/element&gt;
+        -- OR
+        --    &lt;element attr1=val1 attr2=val2 /&gt;
+        --
+        -- For now we'll keep it simple, and look for the first type, and if that doesn't
+        -- turn up anything, then we'll look for the second type.  A hideous waste of CPU...
+        --
+        for attrString, data in string.gmatch(stuff, "&lt;" .. element .. "(.*)&gt;(.*)&lt;/" .. element .. "&gt;") do
+            return { value = data, attrs = extractAttribute(attrString) }
+        end
+
+        for attrString in string.gmatch(stuff, "&lt;" ..  element .. " (.-)/&gt;") do
+            return { value = nil, attrs = extractAttribute(attrString) }
+        end
+    
+        return {};
+    end
+
+    --- Find the named Child device of [this] Device.
+    --
+    -- This function will enumerate the Master/Global list of devices in Vera and
+    -- locate the "named" Child device.  It's used all over to locate the Children.
+    --
+    --   "Why haven't you checked the children"  :)
+    --
+    -- This would make an awfully handy convenience method on a Device object... hint, hint.
+    --
+    function findChild(parentDevice, label)
+        for k, v in pairs(luup.devices) do
+            if (v.device_num_parent == parentDevice
+                and v.id == label) then
+                return k
+            end
+        end
+
+        -- Dump a copy of the Global Module list for debugging purposes.
+        log("findChild cannot find parentDevice: " .. tostring(parentDevice) .. " label: " .. label)
+        for k, v in pairs(luup.devices) do
+            log("Device Number: " .. k ..
+                " v.device_type: " .. tostring(v.device_type) ..
+                " v.device_num_parent: " .. tostring(v.device_num_parent) ..
+                " v.id: " .. tostring(v.id)
+            )
+        end
+    end
+    
+    function refreshCache()
+        --
+        -- And some test code that call's Google's [unofficial] Weather API/URL/
+        --
+        -- Many thanks to the recommendations of both "LibraSun" and "Ap15e" from
+        -- the micasaverde.com forums for providing various pointers to alternative
+        -- Weather services.
+        --
+        debug("refreshCache called")
+        local metric = (luup.variable_get(WEATHER_SERVICE, "Metric", PARENT_DEVICE) == "1")
+        local url = "http://www.google.com/ig/api?weather="
+
+        --
+        -- If the Location override is set, use it's value, otherwise we'll format a string using
+        -- the Lat/Long that Vera Provides.
+        -- We pre-process the user-provided string to pseudo URL-Encode the Value.
+        --
+        local location = luup.variable_get(WEATHER_SERVICE, "Location", PARENT_DEVICE)
+        if (location ~= nil and location ~= "") then
+            url = url .. string.gsub(location, " ", "+")
+        else
+            url = string.format("%s,,,%d,%d", url, luup.latitude * 1000000, luup.longitude * 1000000)
+        end
+
+        debug("refreshCache: " .. url)
+
+        local status, rss = luup.inet.wget(url, 10)
+        debug("refreshCache: " .. status)
+
+        if (status == 0) then
+          debug("Successful execution of URL rss=" .. rss)
+
+          local currentTemp = extractElement(rss, "temp_f")["attrs"]["data"]
+          local forecastLowTemp = extractElement(rss, "low")["attrs"]["data"]
+          local forecastHighTemp = extractElement(rss, "high")["attrs"]["data"]
+          local currentHumidity = extractElement(rss, "humidity")["attrs"]["data"]
+          local unitSystem = extractElement(rss, "unit_system")["attrs"]["data"]
+          local condition = extractElement(rss, "condition")["attrs"]["data"]
+          local windCondition = extractElement(rss, "wind_condition")["attrs"]["data"]
+
+          if (metric == true) then
+              --
+              -- Scale the values from Imperial to Metric
+              --
+              if (unitSystem == "US") then
+                  currentTemp = math.floor((currentTemp - 32) * 5/9 + 0.5)
+                  forecastLowTemp = math.floor((forecastLowTemp-32) * 5/9 + 0.5)
+                  forecastHighTemp = math.floor((forecastHighTemp-32) * 5/9 + 0.5)
+              end
+          else
+              --
+              -- Scale the values from Metric to Imperial
+              --
+              if (unitSystem ~= "US") then
+                  currentTemp = math.floor(currentTemp * 1.8 + 32)
+                  forecastLowTemp = math.floor(forecastLowTemp * 1.8 + 32)
+                  forecastHighTemp = math.floor(forecastHighTemp * 1.8 + 32)
+              end
+          end
+
+          --
+          -- Google returns this as a string value like:
+          --     Humidity: 43%
+          -- so we need to strip out all of the formatting to get the integer value.
+          -- Use "language neutral" parsing in case the values come back in another
+          -- language.
+          --
+          currentHumidity = string.gsub(currentHumidity, ".*: (%d+)%%", "%1")
+          windCondition = string.gsub(windCondition, ".*: (.+)", "%1")
+
+          --
+          -- For demo, print a set of values showing them individually pulled out.
+          --
+          log(string.format("At [%-10.6f,%-10.6f], it\'s currently %s(%s) and %s.  Humidity is %s%%.  Low is %s High is %s.  Condition is %s, Wind Condition is %s",
+              luup.latitude,
+              luup.longitude,
+              currentTemp,
+              extractElement(rss, "unit_system")["attrs"]["data"],
+              extractElement(rss, "condition")["attrs"]["data"],
+              currentHumidity,
+              forecastLowTemp,
+              forecastHighTemp,
+              condition,
+              windCondition))
+
+          -- Store the current timestamp
+          luup.variable_set("urn:micasaverde-com:serviceId:HaDevice1", "LastUpdate", 
+              os.time(), PARENT_DEVICE)
+
+          -- Store the current temperature
+          luup.variable_set(TEMPERATURE_SERVICE, "CurrentTemperature",
+              currentTemp, CURRENT_TEMPERATURE_DEVICE)
+
+          -- Store the current temperature
+          luup.variable_set(TEMPERATURE_SERVICE, "CurrentTemperature",
+              forecastLowTemp, FORECAST_LOW_TEMPERATURE_DEVICE)
+
+          -- Store the current temperature
+          luup.variable_set(TEMPERATURE_SERVICE, "CurrentTemperature",
+              forecastHighTemp, FORECAST_HIGH_TEMPERATURE_DEVICE)
+
+          -- Store the current humidity
+          luup.variable_set("urn:micasaverde-com:serviceId:HumiditySensor1", "CurrentLevel",
+              currentHumidity, CURRENT_HUMIDITY_DEVICE)
+
+          -- Store the current Condition (eg. "Sunny")
+          luup.variable_set(WEATHER_SERVICE, "Condition",
+              condition, PARENT_DEVICE)
+
+          -- Store the current Wind Condition (eg: "Wind: W at 9 mph")
+          luup.variable_set(WEATHER_SERVICE, "WindCondition",
+              windCondition, PARENT_DEVICE)
+        else
+          log("Weather returned status=" .. status)
+        end
+
+        --
+        -- The last parameter is temporary, can be removed in later builds once bug fix
+        -- is in place (http://forums.micasaverde.com/index.php?topic=1608.0)
+        --
+        luup.call_timer("refreshCache", 1, "30m", "")
+    end
+
+    function startup(parentDevice)
+        --
+        -- Validate that the Lat/Long are configured in Vera, otherwise this
+        -- code wont work.
+        --
+        if (luup.latitude == nil or luup.longitude == nil) then
+            luup.set_failure(true)
+            return false
+        end
+
+        local CURRENT_TEMPERATURE_ID = "Weather-Current-Temperature"
+        local FORECAST_HIGH_TEMPERATURE_ID = "Weather-Forecast-HighTemperature"
+        local FORECAST_LOW_TEMPERATURE_ID = "Weather-Forecast-LowTemperature"
+        local CURRENT_HUMIDITY_ID = "Weather-Current-Humidity"
+    
+        log("Google Weather #" .. tostring(parentDevice) .. " starting up with id " .. luup.devices[parentDevice].id)
+
+        --
+        -- Build child devices for each type of metric we're gathering from Google Weather.
+        -- At this point that's:
+        --     Weather-Current-Temperature - the last reported Temperature at your location
+        --     Weather-Current-Humidity - the last reported Humidity Level at your location
+        --
+        local childDevices = luup.chdev.start(parentDevice)
+
+        luup.chdev.append(parentDevice, childDevices,
+            CURRENT_TEMPERATURE_ID, "Temperature",
+            "urn:schemas-micasaverde-com:device:TemperatureSensor:1", "D_TemperatureSensor1.xml",
+            "S_TemperatureSensor1.xml", "", true)
+
+        luup.chdev.append(parentDevice, childDevices,
+            FORECAST_LOW_TEMPERATURE_ID, "Low Temperature",
+            "urn:schemas-micasaverde-com:device:TemperatureSensor:1", "D_TemperatureSensor1.xml",
+            "S_TemperatureSensor1.xml", "", true)
+
+        luup.chdev.append(parentDevice, childDevices,
+            FORECAST_HIGH_TEMPERATURE_ID, "High Temperature",
+            "urn:schemas-micasaverde-com:device:TemperatureSensor:1", "D_TemperatureSensor1.xml",
+            "S_TemperatureSensor1.xml", "", true)
+
+        luup.chdev.append(parentDevice, childDevices,
+            CURRENT_HUMIDITY_ID, "Humidity",
+            "urn:schemas-micasaverde-com:device:HumiditySensor:1", "D_HumiditySensor1.xml",
+            "S_HumiditySensor1.xml", "", true)
+
+        luup.chdev.sync(parentDevice, childDevices)
+
+        --
+        -- Note these are "pass-by-Global" values that refreshCache will later use.
+        -- I need a var-args version of luup.call_timer(...) to pass these in a
+        -- cleaner manner.
+        --
+        
+        PARENT_DEVICE = parentDevice
+        CURRENT_TEMPERATURE_DEVICE = findChild(parentDevice, CURRENT_TEMPERATURE_ID)
+        FORECAST_LOW_TEMPERATURE_DEVICE = findChild(parentDevice, FORECAST_LOW_TEMPERATURE_ID)
+        FORECAST_HIGH_TEMPERATURE_DEVICE = findChild(parentDevice, FORECAST_HIGH_TEMPERATURE_ID)
+        CURRENT_HUMIDITY_DEVICE = findChild(parentDevice, CURRENT_HUMIDITY_ID)
+
+        --
+        -- Set variables for Location and Metric override, only "set" these if they aren't already set
+        -- to force these Variables to appear in Vera's Device list.
+        --
+        if (luup.variable_get(WEATHER_SERVICE, "Location", parentDevice) == nil) then
+            luup.variable_set(WEATHER_SERVICE, "Location", "", parentDevice)
+        end
+
+        if (luup.variable_get(WEATHER_SERVICE, "Metric", parentDevice) == nil) then
+            luup.variable_set(WEATHER_SERVICE, "Metric", "0", parentDevice)
+        end
+
+        --
+        -- Do this deferred to avoid slowing down startup processes.
+        --
+        luup.call_timer("refreshCache", 1, "1", "")
+    end
+  </functions>
+  <incoming>
+      debug("Incoming, really?")
+  </incoming>
+  <startup>startup</startup>
+  <actionList>
+    <action>
+      <serviceId>urn:upnp-micasaverde-com:serviceId:Weather1</serviceId>
+      <name>SetUnitsMetric</name>
+      <run>
+        luup.variable_set(WEATHER_SERVICE, "Metric", "1", lul_device)
+      </run>
+    </action>
+    <action>
+      <serviceId>urn:upnp-micasaverde-com:serviceId:Weather1</serviceId>
+      <name>SetUnitsUS</name>
+      <run>
+        luup.variable_set(WEATHER_SERVICE, "Metric", "0", lul_device)
+      </run>
+    </action>
+    <action>
+      <serviceId>urn:upnp-micasaverde-com:serviceId:Weather1</serviceId>
+      <name>SetLocation</name>
+      <run>
+        luup.variable_set(WEATHER_SERVICE, "Location", lul_settings.location or "", lul_device)
+      </run>
+    </action>
+    </actionList>
+</implementation>

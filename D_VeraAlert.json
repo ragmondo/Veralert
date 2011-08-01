@@ -1,0 +1,135 @@
+{
+    "flashicon": "icons\/generic_sensor.swf",
+    "DisplayStatus": {},
+    "doc_url": {
+        "doc_language": 1,
+        "doc_manual": 1,
+        "doc_version": 1,
+        "doc_platform": 0,
+        "doc_page": "devices" 
+    },
+    "Tabs": [
+        {
+            "Label": {
+                "lang_tag": "tabname_control",
+                "text": "Settings" 
+            },
+            "Position": "0",
+            "TabType": "flash",
+            "ControlGroup": [
+                {
+                    "id": "1",
+                    "type": "info"
+                }
+            ],
+            "Control": [
+                {
+                    "ControlType": "label",
+                    "Label": {
+                        "lang_tag": "device_settings_page",
+                        "text": "Location (Override)" 
+                    },
+                    "Display": {
+                        "Top": 60,
+                        "Left": 50,
+                        "Width": 120,
+                        "Height": 20 
+                    } 
+                },
+                {
+                    "ControlType": "input",
+                    "ID": "Location",
+                    "Display": {
+                        "Top": 80,
+                        "Left": 50,
+                        "Width": 100,
+                        "Height": 20 
+                    } 
+                },
+                {
+                    "ControlType": "button",
+                    "Label": {
+                        "lang_tag": "cmd_set",
+                        "text": "Set" 
+                    },
+                    "Display": {
+                        "Top": 80,
+                        "Left": 160,
+                        "Width": 50,
+                        "Height": 20 
+                    },
+                    "Command": {
+                        "Service": "urn:richardgreen:serviceId:VeraAlert1",
+                        "Action": "SetUser",
+                        "Parameters": [
+                            {
+                                "Name": "location",
+                                "ID": "Location" 
+                            }
+                        ] 
+                    } 
+                },
+            ] 
+        },
+        {
+            "Label": {
+                "lang_tag": "advanced",
+                "text": "Advanced" 
+            },
+            "Position": "2",
+            "TabType": "javascript",
+            "ScriptName": "shared.js",
+            "Function": "advanced_device" 
+        }
+    ],
+	 "sceneList": {
+        "group_1": {
+            "cmd_1": {
+                "label": "Send Alert",
+                "serviceId": "urn:richardgreen:serviceId:VeraAlert1",
+                "action": "SendAlert",
+				 "argumentList": {
+                    "argument_1": {
+                        "dataType": "string",
+                        "defaultValue": "",
+                        "name": "alertMessage",
+						 "prefix": "Alert Msg:",
+                        "suffix": "",
+                    },
+					"argument_2": {
+                        "dataType": "string",
+                        "defaultValue": "",
+                        "name": "recipient",
+						"prefix": "To:",
+			            "suffix": "",
+
+                    } 
+                },
+                "display": {
+                    "service": "urn:richardgreen:serviceId:VeraAlert1",
+                    "variable": "Alert",
+                    "value": "1" 
+                } 
+            }
+        } 
+    },
+    "DeviceType": "urn:richardgreen:device:VeraAlert:1",
+    "eventList": {
+        "event_1":{
+            "label": "Weather Condition",
+            "serviceId": "urn:richardgreen:serviceId:VeraAlert1",
+            "argumentList" : {
+                "argument_1" : {
+                    "dataType": "string",
+                    "defaultValue": "",
+                    "allowedValueList" : {
+                    },
+                    "name": "Condition",
+                    "comparisson": "=",
+                    "prefix": "Condition",
+                    "suffix": ""
+                }
+            }
+        }
+    }
+}

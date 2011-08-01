@@ -1,0 +1,18 @@
+<actionList>
+   <action>
+     <serviceId>urn:upnp-org:serviceId:SwitchPower1</serviceId>
+     <name>SetTarget</name>
+     <run>
+       local lul_command = lul_prefix .. luup.devices[lul_device].id .. 'U\r'
+       local lul_reverse = luup.variable_get("urn:micasaverde-com:serviceId:HaDevice1","ReverseOnOff",lul_device)
+       if( lul_settings.newTargetValue=="1" or (lul_settings.newTargetValue=="0" and lul_reverse=="1") ) then
+         lul_command = lul_prefix .. luup.devices[lul_device].id .. 'D\r'
+       end
+       if luup.io.write(lul_command)==false then
+         luup.log("cannot send: " .. tostring(lul_command),1)
+         luup.set_failure(true)
+         return false
+       end
+     </run>
+   </action>
+ </actionList>

@@ -1,0 +1,29 @@
+application: vera-alert
+version: 4
+runtime: python
+api_version: 1
+
+handlers:
+
+# Console
+
+- url: /console/static
+  static_dir: console/app/view/static
+
+- url: /console.*
+  script: console/app/console.py
+
+- url: /test.*
+  script: gaeunit.py
+#  script: helloworld.py
+
+- url: /css
+  static_dir: templates/css
+
+- url: /c2dm/.*
+  script: bbc2dm.py
+
+- url: /.*
+  script: veralert.py
+
+

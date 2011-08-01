@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html dir="ltr" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta content="en-gb" http-equiv="Content-Language" />
+<title>Vera Alert</title>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<link href="css/main.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+
+<div id="masthead">
+	Vera-Alert</div>
+<div id="top_nav">
+</div>
+<div id="container">
+	<div id="left_col">
+	</div>
+	<div id="page_content">
+	{% for m in messages %}
+    {{ m.message_rcvd|date:"r"  }} - {{ m.message_text }} - {{ m.send_status }} <br />
+    {% endfor %}
+    	
+    </div>
+<div id="footer">
+	(c) 2011 Richard Green</div>
+
+</body>
+
+</html>

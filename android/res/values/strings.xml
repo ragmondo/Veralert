@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">veralert</string>
+    <string name="alert_serverx">http://192.168.1.103:8088/</string>
+    <string name="alert_server">http://vera-alert.appspot.com/</string>
+    <string name="c2dm_name">c2dm@barcodebeasties.com</string>
+   	<string name="set_preferences">Preferences</string>
+    
+</resources>

@@ -1,0 +1,256 @@
+{
+    "flashicon": "icons\/generic_sensor.swf",
+    "imgIconBody": "",
+    "imgIconDimmable": "",
+    "imgIconTurnable": "",
+    "imgIconMin": "",
+    "imgIconMax": "",
+    "halloIconsDir": "pics\/hallo",
+    "DisplayStatus": {
+        
+    },
+    "doc_url": {
+        "doc_language": 1,
+        "doc_manual": 1,
+        "doc_version": 1,
+        "doc_platform": 0,
+        "doc_page": "devices" 
+    },
+    "Tabs": [
+        {
+            "Label": {
+                "lang_tag": "tabname_control",
+                "text": "Settings" 
+            },
+            "Position": "0",
+            "TabType": "flash",
+            "ControlGroup": [
+                {
+                    "id": "1",
+                    "type": "info"
+                },
+                {
+                    "id": "2",
+                    "type": "info"
+                }
+            ],
+            "Control": [
+                {
+                    "ControlType": "label",
+                    "Label": {
+                        "lang_tag": "device_settings_page",
+                        "text": "Display Units" 
+                    },
+                    "Display": {
+                        "Top": 20,
+                        "Left": 50,
+                        "Width": 120,
+                        "Height": 20 
+                    } 
+                },
+                {
+                    "ControlType": "button",
+                    "Label": {
+                        "lang_tag": "cmd_unlock",
+                        "text": "Metric" 
+                    },
+                    "Display": {
+                        "Service": "urn:upnp-micasaverde-com:serviceId:Weather1",
+                        "Variable": "Metric",
+                        "Value": "1",
+                        "Top": 40,
+                        "Left": 50,
+                        "Width": 75,
+                        "Height": 20 
+                    },
+                    "Command": {
+                        "Service": "urn:upnp-micasaverde-com:serviceId:Weather1",
+                        "Action": "SetUnitsMetric"
+                    } 
+                },
+                {
+                    "ControlType": "button",
+                    "Label": {
+                        "lang_tag": "cmd_unlock",
+                        "text": "US Units" 
+                    },
+                    "Display": {
+                        "Service": "urn:upnp-micasaverde-com:serviceId:Weather1",
+                        "Variable": "Metric",
+                        "Value": "0",
+                        "Top": 40,
+                        "Left": 135,
+                        "Width": 75,
+                        "Height": 20 
+                    },
+                    "Command": {
+                        "Service": "urn:upnp-micasaverde-com:serviceId:Weather1",
+                        "Action": "SetUnitsUS"
+                    } 
+                },
+                {
+                    "ControlType": "label",
+                    "Label": {
+                        "lang_tag": "device_settings_page",
+                        "text": "Location (Override)" 
+                    },
+                    "Display": {
+                        "Top": 60,
+                        "Left": 50,
+                        "Width": 120,
+                        "Height": 20 
+                    } 
+                },
+                {
+                    "ControlType": "input",
+                    "ID": "Location",
+                    "Display": {
+                        "Top": 80,
+                        "Left": 50,
+                        "Width": 100,
+                        "Height": 20 
+                    } 
+                },
+                {
+                    "ControlType": "button",
+                    "Label": {
+                        "lang_tag": "cmd_set",
+                        "text": "Set" 
+                    },
+                    "Display": {
+                        "Top": 80,
+                        "Left": 160,
+                        "Width": 50,
+                        "Height": 20 
+                    },
+                    "Command": {
+                        "Service": "urn:upnp-micasaverde-com:serviceId:Weather1",
+                        "Action": "SetLocation",
+                        "Parameters": [
+                            {
+                                "Name": "location",
+                                "ID": "Location" 
+                            }
+                        ] 
+                    } 
+                },
+                {
+                    "ControlGroup": "1",
+                    "ControlPair": "1",
+                    "ControlHeader": "1",
+                    "ControlType": "label",
+                    "Label": {
+                        "lang_tag": "device_settings_page",
+                        "text": "Conditions" 
+                    },
+                    "Display": {
+                        "Top": 100,
+                        "Left": 50,
+                        "Width": 120,
+                        "Height": 20 
+                    } 
+                },
+                {
+                    "ControlGroup": "1",
+                    "ControlPair": "1",
+                    "ControlHeader": "1",
+                    "ControlType": "variable",
+                    "Display": {
+                        "Service": "urn:upnp-micasaverde-com:serviceId:Weather1",
+                        "Variable": "Condition",
+                        "Top": 120,
+                        "Left": 50,
+                        "Width": 120,
+                        "Height": 20 
+                    } 
+                },
+                {
+                    "ControlGroup": "2",
+                    "ControlPair": "2",
+                    "ControlHeader": "2",
+                    "ControlType": "label",
+                    "Label": {
+                        "lang_tag": "device_settings_page",
+                        "text": "Wind Conditions" 
+                    },
+                    "Display": {
+                        "Top": 140,
+                        "Left": 50,
+                        "Width": 120,
+                        "Height": 20 
+                    } 
+                },
+                {
+                    "ControlGroup": "2",
+                    "ControlPair": "2",
+                    "ControlHeader": "2",
+                    "ControlType": "variable",
+                    "Display": {
+                        "Service": "urn:upnp-micasaverde-com:serviceId:Weather1",
+                        "Variable": "WindCondition",
+                        "Top": 160,
+                        "Left": 50,
+                        "Width": 120,
+                        "Height": 20 
+                    } 
+                } 
+                 
+            ] 
+        },
+        {
+            "Label": {
+                "lang_tag": "advanced",
+                "text": "Advanced" 
+            },
+            "Position": "2",
+            "TabType": "javascript",
+            "ScriptName": "shared.js",
+            "Function": "advanced_device" 
+        }
+    ],
+    "DeviceType": "urn:demo-micasaverde-com:device:weather:1",
+    "eventList": {
+        "event_1":{
+            "label": "Weather Condition",
+            "serviceId": "urn:upnp-micasaverde-com:serviceId:Weather1",
+            "argumentList" : {
+                "argument_1" : {
+                    "dataType": "string",
+                    "defaultValue": "",
+                    "allowedValueList" : {
+                        "Chance of Showers": "Chance of Showers",
+                        "Chance of Snow": "Chance of Snow",
+                        "Chance of Storm": "Chance of Storm",
+                        "Clear": "Clear",
+                        "Cloudy": "Cloudy",
+                        "Flurries": "Flurries",
+                        "Fog": "Fog",
+                        "Haze": "Haze",
+                        "Heavy Rain": "Heavy Rain",
+                        "Ice/Snow": "Ice/Snow",
+                        "Light rain": "Light rain",
+                        "Mostly Cloudy": "Mostly Cloudy",
+                        "Mostly Sunny": "Mostly Sunny",
+                        "Overcast": "Overcast",
+                        "Partly Cloudy": "Partly Cloudy",
+                        "Partly Sunny": "Partly Sunny",
+                        "Rain": "Rain",
+                        "Rain and Snow": "Rain and Snow",
+                        "Rain Showers": "Rain Showers",
+                        "Scattered Showers": "Scattered Showers",
+                        "Showers": "Showers",
+                        "Snow": "Snow",
+                        "Snow Showers": "Snow Showers",
+                        "Sunny": "Sunny",
+                        "Thunderstorm": "Thunderstorm",
+                        "Windy": "Windy"
+                    },
+                    "name": "Condition",
+                    "comparisson": "=",
+                    "prefix": "Condition",
+                    "suffix": ""
+                }
+            }
+        }
+    }
+}

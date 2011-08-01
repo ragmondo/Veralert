@@ -1,0 +1,201 @@
+{
+    "flashicon": "icons\/Binary_Light.swf",
+    "imgIconBody": "",
+    "imgIconDimmable": "",
+    "imgIconTurnable": "",
+    "imgIconMin": "pics\/devices\/Light_OFF.png",
+    "imgIconMax": "pics\/devices\/Light_ON.png",
+    "halloIconsDir": "pics\/hallo",
+    "DisplayStatus": {
+        "Service": "urn:upnp-org:serviceId:SwitchPower1",
+        "Variable": "Status",
+        "MinValue": "0",
+        "MaxValue": "1" 
+    },
+	"doc_url": {
+        "doc_language": 1,
+        "doc_manual": 1,
+        "doc_version": 1,
+        "doc_platform": 0,
+        "doc_page": "lighting_devices" 
+    },	
+    "ToggleButton": 1,
+    "Tabs": [
+        {
+            "Label": {
+                "lang_tag": "tabname_control",
+                "text": "Control" 
+            },
+            "Position": "0",
+            "TabType": "flash",
+			"ControlGroup":[
+				{
+					"id":"1",
+					"isSingle":"1"
+				},
+				{
+					"id":"2",
+					"isSingle":"1"
+				}
+			],			
+            "Control": [
+                {
+					"ControlGroup":"2",
+                    "ControlType": "button",
+                    "Label": {
+                        "lang_tag": "cmd_on",
+                        "text": "On" 
+                    },
+                    "Display": {
+                        "Service": "urn:upnp-org:serviceId:SwitchPower1",
+                        "Variable": "Status",
+                        "Value": "1",
+                        "Top": 60,
+                        "Left": 145,
+                        "Width": 75,
+                        "Height": 20 
+                    },
+                    "Command": {
+                        "Service": "urn:upnp-org:serviceId:SwitchPower1",
+                        "Action": "SetTarget",
+                        "Parameters": [
+                            {
+                                "Name": "newTargetValue",
+                                "Value": "1" 
+                            } 
+                        ] 
+                    } 
+                },
+                {
+					"ControlGroup":"1",
+                    "ControlType": "button",
+                    "Label": {
+                        "lang_tag": "cmd_off",
+                        "text": "Off" 
+                    },
+                    "Display": {
+                        "Service": "urn:upnp-org:serviceId:SwitchPower1",
+                        "Variable": "Status",
+                        "Value": "0",
+                        "Top": 60,
+                        "Left": 50,
+                        "Width": 75,
+                        "Height": 20 
+                    },
+                    "Command": {
+                        "Service": "urn:upnp-org:serviceId:SwitchPower1",
+                        "Action": "SetTarget",
+                        "Parameters": [
+                            {
+                                "Name": "newTargetValue",
+                                "Value": "0" 
+                            } 
+                        ] 
+                    } 
+                } 
+            ] 
+        },
+        {
+            "Label": {
+                "lang_tag": "settings",
+                "text": "Settings" 
+            },
+            "Position": "1",
+            "TabType": "javascript",
+            "ScriptName": "shared.js",
+            "Function": "simple_device" 
+        },
+        {
+            "Label": {
+                "lang_tag": "advanced",
+                "text": "Advanced" 
+            },
+            "Position": "2",
+            "TabType": "javascript",
+            "ScriptName": "shared.js",
+            "Function": "advanced_device" 
+        },
+        {
+            "Label": {
+                "lang_tag": "device_options",
+                "text": "Device Options" 
+            },
+            "Position": "3",
+            "TabType": "javascript",
+            "ScriptName": "shared.js",
+            "Function": "device_zwave_options" 
+        },
+        {
+                    "Label": {
+                        "lang_tag": "logs",
+                        "text": "Logs" 
+                    },
+                    "Position": "4",
+                    "TabType": "javascript",
+                    "ScriptName": "shared.js",
+                    "Function": "device_logs" 
+        },
+		{
+                    "Label": {
+                        "lang_tag": "notifications",
+                        "text": "Notifications" 
+                    },
+                    "Position": "5",
+                    "TabType": "javascript",
+                    "ScriptName": "shared.js",
+                    "Function": "device_notifications" 
+        } 
+    ],
+    "sceneList": {
+        "group_1": {
+            "cmd_1": {
+                "label": "ON",
+                "serviceId": "urn:upnp-org:serviceId:SwitchPower1",
+                "action": "SetTarget",
+                "arguments": {
+                    "newTargetValue": "1" 
+                },
+                "display": {
+                    "service": "urn:upnp-org:serviceId:SwitchPower1",
+                    "variable": "Status",
+                    "value": "1" 
+                } 
+            },
+            "cmd_2": {
+                "label": "OFF",
+                "serviceId": "urn:upnp-org:serviceId:SwitchPower1",
+                "action": "SetTarget",
+                "arguments": {
+                    "newTargetValue": "0" 
+                },
+                "display": {
+                    "service": "urn:upnp-org:serviceId:SwitchPower1",
+                    "variable": "Status",
+                    "value": "0" 
+                } 
+            } 
+        } 
+    },
+    "eventList": {
+        "event_1": {
+            "label": "A device is turned on or off",
+            "serviceId": "urn:upnp-org:serviceId:SwitchPower1",
+            "argumentList": {
+                "argument_1": {
+                    "dataType": "boolean",
+                    "defaultValue": "1",
+                    "allowedValueList": {
+                        "Off": "0",
+                        "On": "1" 
+                    },
+                    "name": "Status",
+                    "comparisson": "=",
+                    "prefix": "Which mode",
+                    "suffix": "" 
+                } 
+            } 
+        } 
+    },
+    "DeviceType": "urn:schemas-upnp-org:device:BinaryLight:1",
+    "device_type": "urn:schemas-upnp-org:device:BinaryLight:1" 
+}

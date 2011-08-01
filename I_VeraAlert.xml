@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<implementation>
+  <functions>
+    local http = require("socket.http")
+    local alert_url = "http://vera-alert.appspot.com/"
+    local vera_alert_service = "urn:richardgreen:serviceId:VeraAlert1"
+
+    function log(text)
+      luup.log("VeraAlert " .. text)
+    end
+
+    function escape(in_string)
+     out_string = string.gsub(in_string," ","%%20")
+      return out_string
+    end
+
+    function send_alert(stat,recipient)
+     params = "msg=" .. escape(stat) .. string.char(38) .. "recipient=" .. escape(recipient)
+     long_url = alert_url .. "stat?" .. params
+     log ( " Sending " .. long_url )
+     b, h, c, e = http.request(long_url)
+     log(b)
+     log(h)
+     log("--End of send_status --")
+    end
+
+
+    function send_status(stat)
+     params = "msg=" .. escape(stat)
+     long_url = alert_url .. "stat?" .. params
+     log ( " Sending " .. long_url )
+     b, h, c, e = http.request(long_url)
+     log(b)
+     log(h)
+    log("--End of send_status --")
+    end
+
+    function startup(lul_device)
+     PARENT_DEVICE = lul_device
+     msg = tostring(lul_device) .. " starting up with id " .. luup.devices[lul_device].id
+     log(msg)
+     send_status("startup" .. msg)
+     log("Startup OK")
+    end
+  </functions>
+  <startup>startup</startup>
+  <actionList>
+    <action>
+      <serviceId>urn:richardgreen:serviceId:VeraAlert1</serviceId>
+      <name>SetUser</name>
+      <run>
+        send_status("In SetUser")
+      </run>
+    </action>
+    <action>
+      <serviceId>urn:richardgreen:serviceId:VeraAlert1</serviceId>
+      <name>SendAlert</name>
+      <run>
+        send_alert(lul_settings.alertMessage, lul_settings.recipient)
+      </run>
+    </action>
+  </actionList>
+</implementation>
