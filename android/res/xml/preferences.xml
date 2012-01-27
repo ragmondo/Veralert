@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+        <PreferenceCategory
+                android:title="Alert Tones">
+        <RingtonePreference
+				android:ringtoneType="notification|alarm"
+                android:name="Alert1"
+                android:summary="Select an alert sound"
+                android:title="Alert 1 (default)"
+                android:key="ringtonePref1" />
+        <RingtonePreference
+        		android:ringtoneType="notification|alarm"
+                android:name="Alert2"
+                android:summary="Select an alert sound"
+                android:title="Alert 2"
+                android:key="ringtonePref2" />
+        <RingtonePreference
+  				android:ringtoneType="notification|alarm"
+                android:name="Alert3"
+                android:summary="Select an alert sound"                
+                android:title="Alert 3"
+                android:key="ringtonePref3" />
+        <RingtonePreference
+  				android:ringtoneType="notification|alarm"
+                android:name="Alert4"
+                android:summary="Select an alert sound"
+                android:title="Alert 4"
+                android:key="ringtonePref4" />
+        <RingtonePreference
+  				android:ringtoneType="all"
+                android:name="Alert5"
+                android:summary="Select an alert / ringtone"
+                android:title="Alert 5"
+                android:key="ringtonePref5" />
+</PreferenceCategory>
+</PreferenceScreen>
