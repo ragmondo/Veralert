@@ -1,6 +1,5 @@
 package com.fawepark.veralert;
 
-import android.R;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
@@ -23,7 +22,7 @@ public class Preferences extends PreferenceActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        addPreferencesFromResource(R.xml.preferences);
+       addPreferencesFromResource(R.xml.preferences);
         // Get the custom preference
 
         String ID =  getIDString(this);
