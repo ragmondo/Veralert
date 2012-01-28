@@ -3,6 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="3157919b-1f69-4a69-b1d5-c9b763e89f10" name="Default" comment="Changes from Richard Schaefer">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/.name" afterPath="$PROJECT_DIR$/.idea/.name" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/res/drawable-hdpi/icon.png" afterPath="$PROJECT_DIR$/android/res/drawable-hdpi/icon.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/res/drawable-ldpi/icon.png" afterPath="$PROJECT_DIR$/android/res/drawable-ldpi/icon.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/res/drawable-mdpi/icon.png" afterPath="$PROJECT_DIR$/android/res/drawable-mdpi/icon.png" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/device_screenshot1.png" afterPath="$PROJECT_DIR$/device_screenshot1.png" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/ant.xml" afterPath="$PROJECT_DIR$/.idea/ant.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/compiler.xml" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
@@ -19,13 +22,32 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/D_VeraAlert.xml" afterPath="$PROJECT_DIR$/D_VeraAlert.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/I_VeraAlert.xml" afterPath="$PROJECT_DIR$/I_VeraAlert.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/S_VeraAlert.xml" afterPath="$PROJECT_DIR$/S_VeraAlert.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/.classpath" afterPath="$PROJECT_DIR$/android/.classpath" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/.project" afterPath="$PROJECT_DIR$/android/.project" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/Android.iml" afterPath="$PROJECT_DIR$/android/Android.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/AndroidManifest.xml" afterPath="$PROJECT_DIR$/android/AndroidManifest.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/default.properties" afterPath="$PROJECT_DIR$/android/default.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/proguard.cfg" afterPath="$PROJECT_DIR$/android/proguard.cfg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/res/layout/main.xml" afterPath="$PROJECT_DIR$/android/res/layout/main.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/res/layout/notifications.xml" afterPath="$PROJECT_DIR$/android/res/layout/notifications.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/res/layout/rowlayout.xml" afterPath="$PROJECT_DIR$/android/res/layout/rowlayout.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/res/values/arrays.xml" afterPath="$PROJECT_DIR$/android/res/values/arrays.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/res/values/colors.xml" afterPath="$PROJECT_DIR$/android/res/values/colors.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/res/values/strings.xml" afterPath="$PROJECT_DIR$/android/res/values/strings.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/res/values/styles.xml" afterPath="$PROJECT_DIR$/android/res/values/styles.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/res/xml/preferences.xml" afterPath="$PROJECT_DIR$/android/res/xml/preferences.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/src/com/fawepark/veralert/C2DMReceiver.java" afterPath="$PROJECT_DIR$/android/src/com/fawepark/veralert/C2DMReceiver.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/src/com/fawepark/veralert/DBHelper.java" afterPath="$PROJECT_DIR$/android/src/com/fawepark/veralert/DBHelper.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/src/com/fawepark/veralert/DBSource.java" afterPath="$PROJECT_DIR$/android/src/com/fawepark/veralert/DBSource.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/src/com/fawepark/veralert/DBTuple.java" afterPath="$PROJECT_DIR$/android/src/com/fawepark/veralert/DBTuple.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/src/com/fawepark/veralert/DBViewAdapter.java" afterPath="$PROJECT_DIR$/android/src/com/fawepark/veralert/DBViewAdapter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/src/com/fawepark/veralert/Notifications.java" afterPath="$PROJECT_DIR$/android/src/com/fawepark/veralert/Notifications.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/src/com/fawepark/veralert/Preferences.java" afterPath="$PROJECT_DIR$/android/src/com/fawepark/veralert/Preferences.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/src/com/google/android/c2dm/AllConfig.java" afterPath="$PROJECT_DIR$/android/src/com/google/android/c2dm/AllConfig.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/src/com/google/android/c2dm/C2DMBaseReceiver.java" afterPath="$PROJECT_DIR$/android/src/com/google/android/c2dm/C2DMBaseReceiver.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/src/com/google/android/c2dm/C2DMBroadcastReceiver.java" afterPath="$PROJECT_DIR$/android/src/com/google/android/c2dm/C2DMBroadcastReceiver.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/src/com/google/android/c2dm/C2DMessaging.java" afterPath="$PROJECT_DIR$/android/src/com/google/android/c2dm/C2DMessaging.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/src/com/google/android/c2dm/Config.java" afterPath="$PROJECT_DIR$/android/src/com/google/android/c2dm/Config.java" />
     </list>
     <ignored path="veraalert.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -86,14 +108,14 @@
       <file leaf-file-name="Preferences.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/android/src/com/fawepark/veralert/Preferences.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="82" column="70" selection-start="2913" selection-end="2913" vertical-scroll-proportion="0.0">
+            <state line="39" column="90" selection-start="1464" selection-end="1464" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="DELETE-FILES.txt" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/android/src/com/fawepark/veralert/DELETE-FILES.txt">
+        <entry file="file://$PROJECT_DIR$/android/res/values/DELETE-FILES.txt">
           <provider selected="true" editor-type-id="text-editor">
             <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
               <folding />
@@ -101,10 +123,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="main.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/android/src/com/fawepark/veralert/main.java">
+      <file leaf-file-name="arrays.xml" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/android/res/values/arrays.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="60" column="36" selection-start="1946" selection-end="1957" vertical-scroll-proportion="0.0">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -119,10 +141,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DELETE-FILES.txt" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="DELETE-FILES.txt" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/android/res/layout/DELETE-FILES.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+            <state line="2" column="13" selection-start="17" selection-end="17" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -221,6 +243,10 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="com" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="c2dm" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -620,23 +646,11 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/android/src/com/fawepark/veralert/Preferences.java">
+    <entry file="file://$PROJECT_DIR$/android/res/layout/DELETE-FILES.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="82" column="70" selection-start="2913" selection-end="2913" vertical-scroll-proportion="0.0">
+        <state line="2" column="13" selection-start="17" selection-end="17" vertical-scroll-proportion="0.0">
           <folding />
         </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/android/src/com/fawepark/veralert/DELETE-FILES.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/android/src/com/fawepark/veralert/main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="60" column="36" selection-start="1946" selection-end="1957" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/android/src/com/fawepark/veralert/C2DMReceiver.java">
@@ -646,7 +660,21 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/android/res/layout/DELETE-FILES.txt">
+    <entry file="file://$PROJECT_DIR$/android/src/com/fawepark/veralert/Preferences.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="39" column="90" selection-start="1464" selection-end="1464" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/android/res/values/DELETE-FILES.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/android/res/values/arrays.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />

@@ -1,5 +1,6 @@
 package com.fawepark.veralert;
 
+import android.R;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
