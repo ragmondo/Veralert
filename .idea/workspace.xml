@@ -28,7 +28,6 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/AndroidManifest.xml" afterPath="$PROJECT_DIR$/android/AndroidManifest.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/default.properties" afterPath="$PROJECT_DIR$/android/default.properties" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/proguard.cfg" afterPath="$PROJECT_DIR$/android/proguard.cfg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/res/layout/main.xml" afterPath="$PROJECT_DIR$/android/res/layout/main.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/res/layout/notifications.xml" afterPath="$PROJECT_DIR$/android/res/layout/notifications.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/res/layout/rowlayout.xml" afterPath="$PROJECT_DIR$/android/res/layout/rowlayout.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/res/values/arrays.xml" afterPath="$PROJECT_DIR$/android/res/values/arrays.xml" />
@@ -136,15 +135,6 @@
         <entry file="file://$PROJECT_DIR$/android/src/com/fawepark/veralert/C2DMReceiver.java">
           <provider selected="true" editor-type-id="text-editor">
             <state line="157" column="54" selection-start="5577" selection-end="5577" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DELETE-FILES.txt" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/android/res/layout/DELETE-FILES.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="2" column="13" selection-start="17" selection-end="17" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -646,13 +636,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/android/res/layout/DELETE-FILES.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="13" selection-start="17" selection-end="17" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/android/src/com/fawepark/veralert/C2DMReceiver.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="157" column="54" selection-start="5577" selection-end="5577" vertical-scroll-proportion="0.0">
