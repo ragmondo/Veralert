@@ -1,36 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-        <PreferenceCategory
-                android:title="Alert Tones">
+    <PreferenceCategory
+        android:title="Regitration">
+        android:title="Ring Tones"
+        android:summary="Registration Key"
+        android:defaultValue="false"
+        android:key="RegistrationPrefs">
+        <EditTextPreference
+            android:selectable="false"
+            android:title="Not Registered"
+            android:defaultValue=""
+            android:key="RegistrationID"
+            />
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:title="Retention">
+        android:defaultValue="true"
+        android:key="RetentionPrefs">
+        <EditTextPreference
+            android:selectable="true"
+            android:title="Max Message Count"
+            android:summary="How many of each Unique Message Strings to keep; Select 0 for unlimitted"
+            android:defaultValue="5"
+            android:numeric="integer"
+            android:key="MaxRetention"
+            />
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:title="Alert Ring Tone Preferences">
+        android:title="Ring Tones"
+        android:summary="Associate RingTones with AlertTones"
+        android:defaultValue="true"
+        android:key="ringtonePrefs">
         <RingtonePreference
-				android:ringtoneType="notification|alarm"
-                android:name="Alert1"
-                android:summary="Select an alert sound"
-                android:title="Alert 1 (default)"
-                android:key="ringtonePref1" />
+            android:ringtoneType="notification|alarm"
+            android:name="Alert1"
+            android:summary="Select an alert sound for AlertTone1"
+            android:title="Alert 1 (default)"
+            android:key="ringtonePref1" 
+            />
         <RingtonePreference
-        		android:ringtoneType="notification|alarm"
-                android:name="Alert2"
-                android:summary="Select an alert sound"
-                android:title="Alert 2"
-                android:key="ringtonePref2" />
+            android:ringtoneType="notification|alarm"
+            android:name="Alert2"
+            android:summary="Select an alert sound for AlertTone2"
+            android:title="Alert 2"
+            android:key="ringtonePref2" 
+            />
         <RingtonePreference
-  				android:ringtoneType="notification|alarm"
-                android:name="Alert3"
-                android:summary="Select an alert sound"                
-                android:title="Alert 3"
-                android:key="ringtonePref3" />
+            android:ringtoneType="notification|alarm"
+            android:name="Alert3"
+            android:summary="Select an alert sound for AlertTone3"                
+            android:title="Alert 3"
+            android:key="ringtonePref3" 
+            />
         <RingtonePreference
-  				android:ringtoneType="notification|alarm"
-                android:name="Alert4"
-                android:summary="Select an alert sound"
-                android:title="Alert 4"
-                android:key="ringtonePref4" />
+            android:ringtoneType="notification|alarm"
+            android:name="Alert4"
+            android:summary="Select an alert sound for AlertTone4"
+            android:title="Alert 4"
+            android:key="ringtonePref4" 
+            />
         <RingtonePreference
-  				android:ringtoneType="all"
-                android:name="Alert5"
-                android:summary="Select an alert / ringtone"
-                android:title="Alert 5"
-                android:key="ringtonePref5" />
-</PreferenceCategory>
+            android:ringtoneType="all"
+            android:name="Alert5"
+            android:summary="Select an alert or ringtone for AlertTone5"
+            android:title="Alert 5"
+            android:key="ringtonePref5" 
+            />    
+    </PreferenceCategory>
 </PreferenceScreen>

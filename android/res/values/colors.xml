@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/* //device/apps/common/assets/res/any/colors.xml
+*/
+-->
+<resources>
+    <color name="mybackgroundcolor">#FFD0D0FF</color>
+    <color name="default_text_color">#FFEAEAEA</color>
+</resources>
