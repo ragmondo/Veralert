@@ -1,13 +1,5 @@
 package com.fawepark.veralert;
 
-import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLEncoder;
-import java.util.HashMap;
-import java.util.Map;
-
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -17,10 +9,17 @@ import android.content.Intent;
 import android.net.Uri;
 import android.util.Log;
 import android.widget.Toast;
-
 import com.google.android.c2dm.C2DMBaseReceiver;
 import com.google.android.c2dm.C2DMessaging;
 import com.google.android.c2dm.Config;
+
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLEncoder;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Broadcast receiver that handles Android Cloud to Data Messaging (AC2DM) messages, initiated

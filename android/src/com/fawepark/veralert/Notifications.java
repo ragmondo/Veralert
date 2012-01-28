@@ -1,7 +1,5 @@
 package com.fawepark.veralert;
 
-import java.util.List;
-
 import android.app.ListActivity;
 import android.app.NotificationManager;
 import android.content.Context;
@@ -16,17 +14,28 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import com.google.android.apps.analytics.GoogleAnalyticsTracker;
+
+import java.util.List;
 
 public class Notifications extends ListActivity {
     public static final String TAG = "Veralert";
     private static final String Preferences = "Settings";
     private static final String DeleteNotifications = "Delete";
     private View EditOptions;
-    private DBViewAdapter dbAdapter; 
+    private DBViewAdapter dbAdapter;
+
+    protected GoogleAnalyticsTracker tracker;
+    protected static final int trackerInt = 10;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        tracker = GoogleAnalyticsTracker.getInstance();
+        tracker.start(getResources().getString(R.string.google_analytics_key), Notifications.trackerInt, this);
+        tracker.trackPageView(AnalyticsComms.load);
+
         setContentView(R.layout.notifications);
 
         SharedPreferences sp = getDefault(this);
@@ -64,6 +73,14 @@ public class Notifications extends ListActivity {
       menu.add(0, 1, 0, DeleteNotifications);
       return true;
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        tracker.trackPageView(AnalyticsComms.exit);
+        tracker.stop();
+    }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

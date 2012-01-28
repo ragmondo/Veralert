@@ -10,4 +10,5 @@
     <string name="resetall">Reset</string>
     <string name="selectall">Select All</string>
     <string name="set_preferences">Preferences</string>
+    <string name="google_analytics_key">UA-296782-15</string>
 </resources>

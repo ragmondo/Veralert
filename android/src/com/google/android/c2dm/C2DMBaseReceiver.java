@@ -16,8 +16,6 @@
 
 package com.google.android.c2dm;
 
-import java.io.IOException;
-
 import android.app.AlarmManager;
 import android.app.IntentService;
 import android.app.PendingIntent;
@@ -25,6 +23,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.PowerManager;
 import android.util.Log;
+
+import java.io.IOException;
 
 /**
  * Base class for C2D message receiver. Includes constants for the
