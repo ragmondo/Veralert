@@ -1,0 +1,237 @@
+{
+    "flashicon": "icons/generic_sensor.swf",
+    "imgIconBody": "",
+    "imgIconDimmable": "",
+    "imgIconTurnable": "",
+    "imgIconMin": "",
+    "imgIconMax": "",
+    "halloIconsDir": "pics/hallo",
+    "DisplayStatus": {
+    },
+    "doc_url": {
+        "doc_language": 1,
+        "doc_manual": 1,
+        "doc_version": 1,
+        "doc_platform": 0,
+        "doc_page": "devices" 
+        },
+    "Tabs": [
+        {
+            "Label": {
+                "lang_tag": "tabname_control",
+                "text": "Settings" 
+            },
+            "Position": "0",
+            "TabType": "flash",
+            "SceneGroup": [
+                {
+                    "id": "1",
+                    "top": "0.5",
+                    "left": "0",
+                    "x": "4",
+
+                }
+            ],
+            "ControlGroup": [
+                {
+                    "id": "1",
+                    "scenegroup": "1"
+                }
+            ],
+            "Control": [
+                {
+                    "ControlGroup": "1",
+                    "ControlHeader": "1",
+                    "top": "-0.4",
+                    "left": "0",
+                    "x": "3",
+                    "text_align": "left", 
+                    "ControlType": "label",
+                    "Label": {
+                        "lang_tag": "device_settings_page",
+                        "text": "VeraAlert Device"
+                    },
+                    "Display": {
+                        "Top": 100,
+                        "Left": 50,
+                        "Width": 320,
+                        "Height": 20
+                    }
+                },
+                {
+                    "ControlGroup": "1",
+                    "ControlHeader": "1",
+                    "top": "0.2",
+                    "left": "0",
+                    "x": "3",
+                    "text_align": "left", 
+                    "ControlType": "label",
+                    "Label": {
+                        "lang_tag": "device_settings_page",
+                        "text": "Identifiers (first two):"
+                    },
+                    "Display": {
+                        "Top": 100,
+                        "Left": 143,
+                        "Width": 320,
+                        "Height": 20
+                    }
+                },
+                {
+                    "ControlGroup": "1",
+                    "ControlHeader": "1",
+                    "top": "0.9",
+                    "left": "0",
+                    "x": "2",
+                    "text_align": "left", 
+                    "ControlType": "variable",
+                    "Display": {
+                        "Service": "urn:richardgreen:serviceId:VeraAlert1",
+                        "Variable": "DefaultVeraAlertDeviceIdentifier1",
+                        "Top": 120,
+                        "Left": 50,
+                        "Width": 320,
+                        "Height": 20
+                    }
+                },
+                {
+                    "ControlGroup": "1",
+                    "ControlHeader": "1",
+                    "top": "1.5",
+                    "left": "0",
+                    "x": "2",
+                    "text_align": "left", 
+                    "ControlType": "variable",
+                    "Display": {
+                        "Service": "urn:richardgreen:serviceId:VeraAlert1",
+                        "Variable": "DefaultVeraAlertDeviceIdentifier2",
+                        "Top": 140,
+                        "Left": 50,
+                        "Width": 320,
+                        "Height": 20
+                    }
+                },
+                {
+                    "ControlGroup": "1",
+                    "ControlHeader": "1",
+                    "top": "2.4",
+                    "left": "0",
+                    "x": "2",
+                    "text_align": "left", 
+                    "ControlType": "label",
+                    "Label": {
+                        "lang_tag": "device_settings_page",
+                        "text": "Last alert:"
+                    },
+                    "Display": {
+                        "Top": 180,
+                        "Left": 50,
+                        "Width": 320,
+                        "Height": 20
+                    }
+                },
+                {
+                    "ControlGroup": "1",
+                    "ControlHeader": "1",
+                    "top": "3.0",
+                    "left": "0",
+                    "text_align": "left", 
+                    "ControlType": "variable",
+                    "Display": {
+                        "Service": "urn:richardgreen:serviceId:VeraAlert1",
+                        "Variable": "LastAlertDate",
+                        "Top": 200,
+                        "Left": 50,
+                        "Width": 320,
+                        "Height": 20
+                    }
+                },
+                {
+                    "ControlGroup": "1",
+                    "ControlHeader": "1",
+                    "top": "3.0",
+                    "left": "1",
+                    "text_align": "left", 
+                    "ControlType": "variable",
+                    "Display": {
+                        "Service": "urn:richardgreen:serviceId:VeraAlert1",
+                        "Variable": "LastAlertTime",
+                        "Top": 200,
+                        "Left": 120,
+                        "Width": 320,
+                        "Height": 20
+                    }
+                },
+                {
+                    "ControlType": "label",
+                    "Label": {
+                        "lang_tag": "device_settings_page",
+                        "text": "VeraAlert Device Identifiers"
+                    },
+                    "Display": {
+                        "Top": 20,
+                        "Left": 50,
+                        "Width": 320,
+                        "Height": 20
+                    }
+                },
+                {
+                    "ControlType": "variable",
+                    "Display": {
+                        "Service": "urn:richardgreen:serviceId:VeraAlert1",
+                        "Variable": "DefaultVeraAlertDeviceIdentifiers",
+                        "Top": 40,
+                        "Left": 50,
+                        "Width": 320,
+                        "Height": 20
+                    }
+                },
+                {
+                    "ControlType": "input",
+                    "ID": "VeraAlertTokens",
+                    "Display": {
+                        "Top": 60,
+                        "Left": 50,
+                        "Width": 160,
+                        "Height": 20 
+                    } 
+                },
+                {
+                    "ControlType": "button",
+                    "Label": {
+                        "lang_tag": "cmd_set",
+                        "text": "Set" 
+                    },
+                    "Display": {
+                        "Top": 60,
+                        "Left": 220,
+                        "Width": 50,
+                        "Height": 20 
+                    },
+                    "Command": {
+                        "Service": "urn:richardgreen:serviceId:VeraAlert1",
+                        "Action": "SetDeviceIdentifiers",
+                        "Parameters": [
+                            {
+                                "Name": "deviceIdentifiers",
+                                "ID": "VeraAlertTokens" 
+                            }
+                        ] 
+                    } 
+                }
+            ] 
+        },
+        {
+            "Label": {
+                "lang_tag": "advanced",
+                "text": "Advanced" 
+                },
+            "Position": "2",
+            "TabType": "javascript",
+            "ScriptName": "shared.js",
+            "Function": "advanced_device" 
+        }
+    ],
+
+    "DeviceType": "urn:richardgreen:device:VeraAlert:1"
+}

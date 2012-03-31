@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<root xmlns="urn:schemas-upnp-org:device-1-0">
+    <specVersion>
+        <major>1</major>
+        <minor>0</minor>
+    </specVersion>
+    <device>
+        <deviceType>urn:richardgreen:device:VeraAlert:1</deviceType>
+        <staticJson>D_VeraAlert.json</staticJson>
+        <serviceList>
+            <service>
+                <serviceType>urn:richardgreen:service:VeraAlert:1</serviceType>
+                <serviceId>urn:richardgreen:serviceId:VeraAlert1</serviceId>
+                <SCPDURL>S_VeraAlert.xml</SCPDURL>
+            </service>
+        </serviceList>
+        <implementationList>
+            <implementationFile>I_VeraAlert.xml</implementationFile>
+        </implementationList>
+    </device>
+</root>

@@ -1,0 +1,126 @@
+<?xml version="1.0"?>
+<implementation>
+    <functions>
+        local http = require("socket.http")
+        local ALERT_URL = "http://vera-alert.appspot.com/"
+        local vera_alert_service = "urn:richardgreen:serviceId:VeraAlert1"
+
+        function log (text)
+            luup.log("VeraAlert: "..(text or "nil"))
+        end
+
+        function escape (in_string)
+            local out_string = string.gsub(in_string, " ", "%%20")
+            return out_string
+        end
+
+        function expandShorthand(in_string)
+            return string.gsub(in_string, "{([12345])}" , "AlertTone%1")
+        end
+
+        function getVariable(service, variable, id, default)
+            local res = luup.variable_get(service, variable, id)
+
+            if (res == nil) or (res == '') then
+                res = default
+                luup.variable_set(service, variable, default, id)
+            end
+            return res
+        end
+
+        function setDeviceIdentifiers(dids)
+            local i = 0
+            log("Setting device identifiers: " .. dids)
+            luup.variable_set(vera_alert_service, "DefaultVeraAlertDeviceIdentifiers", dids, lul_device) 
+
+            for t in string.gmatch(dids, "([%a%d]+)") do
+                i = i + 1
+                log("Setting VeraAlertDeviceIdentifier" .. i .. "to " .. t)
+
+                if i &lt;= 2 then
+                    luup.variable_set(vera_alert_service, "DefaultVeraAlertDeviceIdentifier" .. i, t, lul_device) 
+                end
+            end
+
+            for j = i + 1, 2 do
+                luup.variable_set(vera_alert_service, "DefaultVeraAlertDeviceIdentifier" .. j, "", lul_device) 
+            end
+        end
+
+        function sendAlert(msg, rcp)
+            msg = expandShorthand(msg)
+            sendAlert2(-1, msg, rcp)
+        end
+
+        function sendAlert2(tone, msg, rcp)
+            local AlertTone = tonumber(tone)
+            local params
+      
+            if (rcp == nil) or (rcp == "") then
+                rcp = luup.variable_get(vera_alert_service, "DefaultVeraAlertDeviceIdentifiers", lul_device);
+            end 
+
+            if (AlertTone ~= nil) and (AlertTone &lt;= 5) and (AlertTone &gt;= 1) then
+                params = "msg=AlertTone"..tone.." "..msg
+                params = params..string.char(38).."tone="..tone
+            else
+                params = "msg="..msg
+            end
+
+            params = params..string.char(38).."time="..os.time()
+
+            for t in string.gmatch(rcp, "([%a%d]+)") do
+                payload = "recipient="..escape(t)..string.char(38)..params
+                local longUrl = ALERT_URL.."stat?"..escape(payload)
+                log("sendAlert Sending "..longUrl)
+                local b, h = http.request(longUrl)
+                log("sendAlert b = "..(b or "nil"))
+                log("sendAlert h = "..(h or "nil"))
+            end
+
+            luup.variable_set(vera_alert_service, "LastAlertDate", os.date('%Y-%m-%d'), lul_device)
+            luup.variable_set(vera_alert_service, "LastAlertTime", os.date('%H:%M:%S'), lul_device)
+
+            log("sendAlert --End of sendAlert --")
+        end
+
+        function startup(lul_device)
+            msg = "starting up with id " .. luup.devices[lul_device].id
+            log(msg)
+--            send_status("startup" .. msg)
+
+            getVariable(vera_alert_service, "DefaultVeraAlertDeviceIdentifiers", lul_device, "" )
+            getVariable(vera_alert_service, "DefaultVeraAlertDeviceIdentifier1", lul_device, "")
+            getVariable(vera_alert_service, "DefaultVeraAlertDeviceIdentifier2", lul_device, "")
+            getVariable(vera_alert_service, "LastAlertDate", lul_device, os.date('%Y-%m-%d'))
+            getVariable(vera_alert_service, "LastAlertTime", lul_device, os.date('%H:%M:%S'))
+
+            log("Startup OK")
+            return true
+        end
+    </functions>
+    <startup>startup</startup>
+    <actionList>
+        <action>
+            <serviceId>urn:richardgreen:serviceId:VeraAlert1</serviceId>
+            <name>SendAlert</name>
+            <run>
+                sendAlert(lul_settings.Message or "nil", lul_settings.Recipient or "nil")
+            </run>
+        </action>
+        <action>
+            <serviceId>urn:richardgreen:serviceId:VeraAlert1</serviceId>
+            <name>SendAlert2</name>
+            <run>
+                sendAlert2(lul_settings.AlertTone or "nil", lul_settings.Message or "nil", lul_settings.Recipient or "nil")
+            </run>
+        </action>
+        <action>
+            <serviceId>urn:richardgreen:serviceId:VeraAlert1</serviceId>
+            <name>SetDeviceIdentifiers</name>
+            <run>
+                setDeviceIdentifiers(lul_settings.deviceIdentifiers or "nil")
+            </run>
+        </action>
+    </actionList>
+</implementation>
