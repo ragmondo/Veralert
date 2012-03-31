@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<scpd xmlns="urn:schemas-upnp-org:service-1-0">
+    <specVersion>
+        <major>1</major>
+        <minor>0</minor>
+    </specVersion>
+    <serviceStateTable>
+        <stateVariable sendEvents="yes">
+            <name>DefaultVeraAlertTokens</name>
+            <sendEventsAttribute>no</sendEventsAttribute> 
+            <dataType>string</dataType>
+            <defaultValue></defaultValue>
+        </stateVariable>
+    </serviceStateTable>
+    <actionList>
+        <action>
+            <name>SendAlert</name>
+            <argumentList>
+                <argument>
+                    <name>AlertTone</name>
+                    <direction>in</direction>
+                    <relatedStateVariable>string</relatedStateVariable>
+                </argument>
+                <argument>
+                    <name>Message</name>
+                    <direction>in</direction>
+                    <relatedStateVariable>string</relatedStateVariable>
+                </argument>
+                <argument>
+                    <name>Recipient</name>
+                    <direction>in</direction>
+                    <relatedStateVariable>string</relatedStateVariable>
+                </argument>
+            </argumentList>
+        </action>
+    </actionList>
+</scpd>
