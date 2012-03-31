@@ -17,6 +17,21 @@
             <name>SendAlert</name>
             <argumentList>
                 <argument>
+                    <name>Message</name>
+                    <direction>in</direction>
+                    <relatedStateVariable>string</relatedStateVariable>
+                </argument>
+                <argument>
+                    <name>Recipient</name>
+                    <direction>in</direction>
+                    <relatedStateVariable>string</relatedStateVariable>
+                </argument>
+            </argumentList>
+        </action>
+        <action>
+            <name>SendAlert2</name>
+            <argumentList>
+                <argument>
                     <name>AlertTone</name>
                     <direction>in</direction>
                     <relatedStateVariable>string</relatedStateVariable>
@@ -30,6 +45,16 @@
                     <name>Recipient</name>
                     <direction>in</direction>
                     <relatedStateVariable>string</relatedStateVariable>
+                </argument>
+            </argumentList>
+        </action>
+        <action>
+            <name>SetDeviceIdentifiers</name>
+            <argumentList>
+                <argument>
+                    <name>deviceIdentifiers</name>
+                    <direction>in</direction>
+                    <relatedStateVariable>string</relatedStateVariable>         
                 </argument>
             </argumentList>
         </action>
